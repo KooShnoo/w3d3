@@ -98,13 +98,13 @@ def fib_iter(n)
 end
 
 # p fib_iter(0) == []
-p fib_iter(1) == [0]
-p fib_iter(2) == [0, 1]
-p fib_iter(3) == [0, 1, 1]
-p fib_iter(4) == [0, 1, 1, 2]
-p fib_iter(5) == [0, 1, 1, 2, 3]
-p fib_iter(6) == [0, 1, 1, 2, 3, 5]
-p fib_iter(7) == [0, 1, 1, 2, 3, 5, 8]
+# p fib_iter(1) == [0]
+# p fib_iter(2) == [0, 1]
+# p fib_iter(3) == [0, 1, 1]
+# p fib_iter(4) == [0, 1, 1, 2]
+# p fib_iter(5) == [0, 1, 1, 2, 3]
+# p fib_iter(6) == [0, 1, 1, 2, 3, 5]
+# p fib_iter(7) == [0, 1, 1, 2, 3, 5, 8]
 
 def fib_recursive(n)
   return [0] if n == 1
@@ -115,10 +115,38 @@ def fib_recursive(n)
 end
 
 # p fib_iter(0) == []
-p fib_recursive(1) == [0]
-p fib_recursive(2) == [0, 1]
-p fib_recursive(3) == [0, 1, 1]
-p fib_recursive(4) == [0, 1, 1, 2]
-p fib_recursive(5) == [0, 1, 1, 2, 3]
-p fib_recursive(6) == [0, 1, 1, 2, 3, 5]
-p fib_recursive(7) == [0, 1, 1, 2, 3, 5, 8]
+# p fib_recursive(1) == [0]
+# p fib_recursive(2) == [0, 1]
+# p fib_recursive(3) == [0, 1, 1]
+# p fib_recursive(4) == [0, 1, 1, 2]
+# p fib_recursive(5) == [0, 1, 1, 2, 3]
+# p fib_recursive(6) == [0, 1, 1, 2, 3, 5]
+# p fib_recursive(7) == [0, 1, 1, 2, 3, 5, 8]
+
+def bsearch(arr, target)
+   if arr.length == 1
+    return nil if arr[0] != target
+    return 0
+   end
+
+   idx_mid = (arr.length / 2).to_i
+   first_half = arr[...idx_mid]
+   second_half = arr[idx_mid..]
+
+   first_result = bsearch(first_half, target)
+   second_result = bsearch(second_half, target)
+
+   return first_result if !first_result.nil?
+
+   return second_result + first_half.length if !second_result.nil?
+
+   nil
+end
+
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
