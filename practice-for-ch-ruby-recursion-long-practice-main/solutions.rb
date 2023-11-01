@@ -164,7 +164,7 @@ def merge(arr1, arr2)
     elsif arr1[i] < arr2[j]
       merged_arr << arr1[i]
       i += 1
-    elsif arr1[i] > arr2[j]
+    else 
       merged_arr << arr2[j]
       j += 1
     end
@@ -172,5 +172,25 @@ def merge(arr1, arr2)
   merged_arr
 end
 
-p merge([27, 38], [3, 43]) # => [3, 27, 38, 43]
-p merge([3, 27, 38, 43], [9, 10, 82]) # => [3, 9, 10, 27, 38, 43, 82]
+# p merge([27, 38], [3, 43]) # => [3, 27, 38, 43]
+# p merge([3, 27, 38, 43], [9, 10, 82]) # => [3, 9, 10, 27, 38, 43, 82]
+
+def merge_sort(arr)
+    return arr if arr.length == 1
+
+    idx_mid = (arr.length / 2).to_i
+    first_half = arr[...idx_mid]
+    second_half = arr[idx_mid..]
+
+    merge(merge_sort(first_half), merge_sort(second_half))
+
+end
+
+# p merge_sort([1,56,56,83,5,788,6,43,335,343])
+# p merge_sort([1,56,83,1,5,788,6,43,335,343])
+# p merge_sort([4,2,1,66,44,22,55,24,567,889])
+
+
+
+
+
