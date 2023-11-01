@@ -150,3 +150,27 @@ end
 # p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 # p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 # p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
+def merge(arr1, arr2)
+  merged_arr = []
+  i = 0
+  j = 0
+  while merged_arr.length < arr1.length + arr2.length
+    # puts "i=  #{i}, j= #{j}, arr1[i..] = #{arr1[i..]}, arr2[j..] = #{arr2[j..]}"
+    if arr1[i].nil?
+      merged_arr += arr2[j..]
+    elsif arr2[j].nil?
+      merged_arr += arr1[i..]
+    elsif arr1[i] < arr2[j]
+      merged_arr << arr1[i]
+      i += 1
+    elsif arr1[i] > arr2[j]
+      merged_arr << arr2[j]
+      j += 1
+    end
+  end
+  merged_arr
+end
+
+p merge([27, 38], [3, 43]) # => [3, 27, 38, 43]
+p merge([3, 27, 38, 43], [9, 10, 82]) # => [3, 9, 10, 27, 38, 43, 82]
