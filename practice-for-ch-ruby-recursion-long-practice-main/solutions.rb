@@ -164,7 +164,7 @@ def merge(arr1, arr2)
     elsif arr1[i] < arr2[j]
       merged_arr << arr1[i]
       i += 1
-    else 
+    else
       merged_arr << arr2[j]
       j += 1
     end
@@ -191,6 +191,20 @@ end
 # p merge_sort([4,2,1,66,44,22,55,24,567,889])
 
 
+def subsets(arr)
+  return [[]] if arr.empty?
+  
+  previous = subsets(arr[...-1])
+  new_subsets = []
+  previous.each do |ele|
+    new_subsets << ele
 
+    new_subsets << ele + [arr[-1]]
+  end
+  new_subsets
+end
 
-
+p subsets([]) # => [[]]
+p subsets([1]) # => [[], [1]]
+p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+p subsets([1, 2, 3]) # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
