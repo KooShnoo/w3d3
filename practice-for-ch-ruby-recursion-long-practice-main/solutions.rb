@@ -204,7 +204,47 @@ def subsets(arr)
   new_subsets
 end
 
-p subsets([]) # => [[]]
-p subsets([1]) # => [[], [1]]
-p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
-p subsets([1, 2, 3]) # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+# p subsets([]) # => [[]]
+# p subsets([1]) # => [[], [1]]
+# p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+# p subsets([1, 2, 3]) # => [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+def permutations(arr)
+    # Base case: if the array has only one element, return an array containing a single-element array
+    return [arr] if arr.length == 1
+    
+    # Recursive case: for each element in the array, generate all permutations of the remaining elements
+    result = []
+    arr.each_with_index do |e, i|
+      rest = arr[0...i] + arr[i+1..-1]
+      permutations(rest).each do |perm|
+        result << [e] + perm
+      end
+    end
+    
+    result
+  end
+  
+  # Example usage:
+#   p permutations([1, 2, 3])
+  
+
+# def permutations(array)
+#     return [[]] if array.empty?
+#     return [[], array] if array.length == 1
+
+#     combinations = array.combination(array.length - 1).to_a
+
+#     permutation_sets = combinations.map { |combination| permutations(combination) }
+
+#     permutation_sets.each_with_index.map do |permutation_set, i|
+#         permutation_set.map { |permutation| permutation.push(array.reverse[i]) }
+
+#     end.flatten(1).filter { |permutation| permutation.length == array.length}
+# end
+
+p permutations([1, 2, 3]) # => [[1, 2, 3], [1, 3, 2],
+#     [2, 1, 3], [2, 3, 1],
+#     [3, 1, 2], [3, 2, 1]]
+puts
+
+p permutations([1, 2])
